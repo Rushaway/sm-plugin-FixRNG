@@ -616,6 +616,9 @@ void SetVelocity(int client, float velocity[3], bool dontUseTeleportEntity = fal
 public MRESReturn DHook_ProcessMovementPre(Handle hParams)
 {
 	int client = DHookGetParam(hParams, 1);
+	
+	if(!IsClientInGame(client))
+		return MRES_Ignored;
 
 	g_iTick[client]++;
 	g_flFrameTime[client] = GetTickInterval() * GetEntPropFloat(client, Prop_Data, "m_flLaggedMovementValue");
